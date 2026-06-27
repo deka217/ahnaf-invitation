@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,
+initial-scale=1,
+maximum-scale=1,
+user-scalable=no,
+viewport-fit=cover">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Invitation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            background: #000;
+            touch-action: manipulation;
+        }
+
+        .container {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100dvh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        /* Phones Portrait */
+        @media (orientation:portrait) {
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                background: #000;
+            }
+
+        }
+
+        /* Tablets / Landscape */
+        @media (orientation:landscape) {
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        }
+
+        .buttons {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: calc(env(safe-area-inset-bottom) + 20px);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            z-index: 999;
+        }
+
+        /* ========================= */
+        /* HIGH TECH BUTTON */
+        /* ========================= */
+
+        .hud-btn {
+
+            position: relative;
+
+            width: 145px;
+            height: 62px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            border: none;
+            outline: none;
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            clip-path: polygon(10% 0,
+                    90% 0,
+                    100% 18%,
+                    100% 82%,
+                    90% 100%,
+                    10% 100%,
+                    0 82%,
+                    0 18%);
+
+            transition: .35s;
+        }
+
+        /* animated border */
+
+        .hud-btn::before {
+
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            border: 2px solid currentColor;
+
+            clip-path: inherit;
+
+            opacity: .8;
+        }
+
+        /* glow */
+
+        .hud-btn::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -12px;
+
+            background: inherit;
+
+            filter: blur(18px);
+
+            opacity: .45;
+
+            z-index: -1;
+
+        }
+
+        /* text */
+
+        .hud-btn span {
+
+            position: relative;
+            z-index: 5;
+
+        }
+
+        /* GREEN */
+
+        .hud-green {
+
+            color: #00ffe7;
+
+            background:
+                linear-gradient(180deg,
+                    rgba(0, 255, 220, .20),
+                    rgba(0, 70, 60, .65));
+
+            box-shadow:
+                0 0 10px #00ffe7,
+                inset 0 0 15px rgba(0, 255, 255, .4);
+
+        }
+
+        /* RED */
+
+        .hud-red {
+
+            color: #ff375f;
+
+            font-size: 28px;
+
+            background:
+                linear-gradient(180deg,
+                    rgba(255, 40, 80, .20),
+                    rgba(70, 0, 20, .65));
+
+            box-shadow:
+                0 0 10px #ff375f,
+                inset 0 0 15px rgba(255, 60, 90, .4);
+
+        }
+
+        /* Hover */
+
+        .hud-btn:hover {
+
+            transform: translateY(-2px) scale(1.04);
+
+        }
+
+        /* Click */
+
+        .hud-btn:active {
+
+            transform: scale(.94);
+
+        }
+
+        /* Scan Line Animation */
+
+        .hud-btn::before {
+
+            animation: borderPulse 2s linear infinite;
+
+        }
+
+        @keyframes borderPulse {
+
+            0% {
+                opacity: .5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: .5;
+            }
+
+        }
+
+        /* Moving Glow */
+
+        .hud-btn span::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: -20px;
+            left: -60px;
+
+            width: 30px;
+            height: 120px;
+
+            background: rgba(255, 255, 255, .4);
+
+            transform: rotate(25deg);
+
+            animation: shine 2.8s linear infinite;
+
+        }
+
+        @keyframes shine {
+
+            0% {
+
+                left: -60px;
+
+            }
+
+            100% {
+
+                left: 220px;
+
+            }
+
+        }
+
+        /* Mobile */
+
+        @media(max-width:480px) {
+
+            .hud-btn {
+
+                width: 125px;
+                height: 56px;
+
+                font-size: 18px;
+
+            }
+
+            .hud-red {
+
+                font-size: 26px;
+
+            }
+
+        }
+
+        .map:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width:480px) {
+
+            .btn {
+                font-size: 15px;
+                padding: 13px 22px;
+            }
+
+            .buttons {
+                bottom: 20px;
+                padding: 0 15px;
+            }
+
+        }
+
+        @supports(padding:max(0px)) {
+            .buttons {
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <video autoplay muted playsinline webkit-playsinline>
+
+            <source src="./assets/Ahnafironman.mp4" type="video/mp4">
+
+        </video>
+
+        <div class="buttons">
+
+            <button class="hud-btn hud-green" onclick="closeInvitation()">
+                <span>OK</span>
+            </button>
+
+            <a class="hud-btn hud-red" href="https://maps.app.goo.gl/WJ588yVFWri15jso8" target="_blank"
+                aria-label="Location">
+                <img src="./assets/—Pngtree—3d location icon clipart in_9095284.png" style="width: 50px;" alt="">
+            </a>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        async function closeInvitation() {
+            if (!sessionStorage.getItem("counted")) {
+
+                try {
+                    const response = await fetch("https://sairamusik.com/click", {
+                        method: "POST"
+                    });
+
+                    const data = await response.json();
+
+                    console.log("Counter:", data);
+
+                    sessionStorage.setItem("counted", "true");
+
+                } catch (err) {
+                    console.error("Fetch Error:", err);
+                }
+            }
+
+            alert("Terimakasih Konfirmasinya!");
+            location.reload();
+        }
+    </script>
+
+</body>
+
+</html>
